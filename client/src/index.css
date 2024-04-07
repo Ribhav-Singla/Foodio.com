@@ -1,0 +1,42 @@
+/* utility class */
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.no-outline:focus {
+  outline: none !important;
+}
+
+/* navbar */
+
+nav {
+  height: 4rem;
+  padding-left: 2rem;
+  font-size: 1.1rem;
+}
+
+.navbar-brand {
+  border-bottom: 2px solid #dc3545 !important;
+  border-right: 2px solid #dc3545 !important;
+  border-top: 2px solid #dc3545 !important;
+  padding-right: 8px;
+}
+
+.nav-link {
+  border-bottom: 2px solid transparent;
+  transition: 0.1s linear;
+  color: black !important;
+}
+
+.nav-link:hover {
+  border-bottom: 2px solid #dc3545;
+}
+
+/* footer */
+
+.footer {
+  background: rgba(220, 220, 220, 0.3);
+  padding-top: 2rem;
+}
