@@ -47,7 +47,7 @@ export default function ContactUs() {
 
 
       <div className="d-flex align-items-center justify-content-center flex-wrap gap-4 mb-5">
-        <form method="POST" action="/api/review" className="needs-validation col-sm-6 col-md-4" noValidate>
+        <form method="POST" action={`${import.meta.env.VITE_BACKEND_URL}/api/review`} className="needs-validation col-sm-6 col-md-4" noValidate>
           <div className="">
             <input
               type="text"

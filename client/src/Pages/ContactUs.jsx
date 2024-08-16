@@ -51,7 +51,7 @@ export default function ContactUs() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const res = await axios.post('/api/contactUs', formData);
+      const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/contactUs`, formData,{withCredentials:true});
       if(res.data === 'login'){
         toast.error('you must be logged in!');
         navigate('/login');

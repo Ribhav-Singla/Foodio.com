@@ -17,7 +17,7 @@ export default function ReservationBookingConfirmation(props){
     // handling modify reservation data 
     const handleModify = async()=>{
         try {
-            await axios.post(`/api/reservation/confirmation/${id}/edit`)
+            await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/reservation/confirmation/${id}/edit`)
                 .then((res)=>{
                     if(res.data !== 'error'){
                         navigate(`/reservation/confirmation/${id}/reservationModify`,{state : res.data});

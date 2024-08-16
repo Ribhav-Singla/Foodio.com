@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express");
 const Review = require("../models/review.js");
 const User = require('../models/user.js');
@@ -28,7 +29,7 @@ router.post("/", isLoggedIn ,wrapAsync(async (req, res) => {
   registeredUser.reviews.push(newReview._id);
   registeredUser.save();
   
-  res.redirect("/");
+  res.redirect(process.env.FRONTEND_URL);
 }));
 
 router.delete("/:id", wrapAsync(async (req, res) => {

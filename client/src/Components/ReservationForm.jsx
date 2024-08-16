@@ -59,7 +59,7 @@ export default function ReservationForm() {
         <div className="d-flex justify-content-center align-items-center flex-wrap gap-4">
           <div className="col-8 col-sm-9 col-md-5  mt-3">
             <h5 className="fw-bold mb-3">Data order</h5>
-            <form method="POST" action="/api/reservation" className="needs-validation" noValidate>
+            <form method="POST" action={`${import.meta.env.VITE_BACKEND_URL}/api/reservation`} className="needs-validation" noValidate>
               <input
                 type="text"
                 name="username"

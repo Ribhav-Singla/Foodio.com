@@ -93,7 +93,7 @@ export default function OrderList({
       toast.error("your cart is empty");
     } else {
       try {
-        await axios.get("/api/user").then((res) => {
+        await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/user`,{withCredentials:true}).then((res) => {
           if (res.data === "login") {
             toast.error("you must be logged in!");
             navigate("/login");

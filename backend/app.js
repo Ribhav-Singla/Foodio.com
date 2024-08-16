@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express");
 const mongoose = require("mongoose");
 const reviewRouter = require("./routes/review.js");
@@ -11,15 +12,23 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user.js');
 const app = express();
+const cors = require('cors');
+app.use(cors({
+  origin: [process.env.FRONTEND_URL],
+  credentials: true
+}))
+
+const PORT = process.env.PORT
+const MONGO_URL = process.env.MONGO_URL
 
 // database connection
 mongoose
-  .connect("mongodb://127.0.0.1:27017/Foodio")
+  .connect(MONGO_URL)
   .then(() => console.log("database connected"))
   .catch((err) => console.log(err));
 
 const sessionOptions = {
-  secret : "mysupersecretcode",
+  secret : process.env.SESSION_SECRET,
   resave : false,
   saveUninitialized: true,
   cookie : {
@@ -80,6 +89,6 @@ app.use((err,req,res,next)=>{
   res.status(statusCode).send(message);
 })
 
-app.listen(8000, () => {
-  console.log(`server started on http://localhost:8000/`);
+app.listen(PORT, () => {
+  console.log(`server started on http://localhost:${PORT}/`);
 });

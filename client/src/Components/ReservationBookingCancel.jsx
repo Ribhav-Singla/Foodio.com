@@ -18,7 +18,7 @@ export default function ReservationBookingCancel(){
     // handling cancel the booking 
     const handleCancelBooking = async()=>{
         try {
-            axios.delete(`/api/reservation/cancel/${id}`)
+            axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/reservation/cancel/${id}`,{withCredentials:true})
                 .then((res)=>{
                     if(res.data === 'success'){
                         toast.success("Your reservation is cancelled successfully");

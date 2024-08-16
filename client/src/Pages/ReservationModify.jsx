@@ -78,7 +78,7 @@ export default function ReservationModify() {
         <div>
           <form
             method="POST"
-            action={`/api/reservation/Edited/${id}`}
+            action={`${import.meta.env.VITE_BACKEND_URL}/api/reservation/Edited/${id}`}
             className="needs-validation"
             noValidate
           >

@@ -48,7 +48,7 @@ export default function Checkout(){
           <RxCross2 style={{position:"absolute",left:"97%",cursor:"pointer"}} size={25} onClick={handleExit}/>
           <h1 className="fw-bold mb-3 text-center">Checkout</h1>
           <div>
-              <form method="POST" action="/api/checkout" className="needs-validation" noValidate>
+              <form method="POST" action={`${import.meta.env.VITE_BACKEND_URL}/api/checkout`} className="needs-validation" noValidate>
                   <div>
                       <label htmlFor="shippingAddress" className="form-label mb-2">Shipping address</label>
                       <div className="d-flex gap-3">

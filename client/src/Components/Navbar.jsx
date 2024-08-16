@@ -15,7 +15,7 @@ export default function Navbar() {
   const navigate = useNavigate();
   const handleLogout = async () => {
     try {
-      await axios.get("/api/logout").then((res) => {
+      await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/logout`,{withCredentials:true}).then((res) => {
         if (res.data === "success") {
           dispatch(setUser(""))
           toast.info("you logged out");

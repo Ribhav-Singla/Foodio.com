@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express");
 const Checkout = require("../models/checkout.js");
 const User = require('../models/user.js');
@@ -13,14 +14,14 @@ router.post("/", wrapAsync(async (req, res) => {
   }
   const newCheckout = new Checkout(req.body);
   newCheckout.owner = req.user._id;
-  await newCheckout.save();
-
+  await newCheckout.save(); 
+  
   const registerdUser =await User.findById(req.user._id);
   registerdUser.orders.push(newCheckout._id);
   registerdUser.save();
 
   const id = newCheckout._id;
-  res.redirect(`/orderSuccess/${id}`);
+  res.redirect(`${process.env.FRONTEND_URL}/orderSuccess/${id}`);
 }));
 
 module.exports = router;

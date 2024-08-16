@@ -43,7 +43,7 @@ export default function Reservation() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const res = await axios.get("/api/user");
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/user`,{withCredentials:true});
       if (res.data === "login") {
         toast.error("You must be logged in!");
         navigate("/login");

@@ -10,7 +10,7 @@ export default function Home() {
 
   useEffect(() => {
     axios
-      .get("/api/review")
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/review`)
       .then((res) => {
         setReviews(res.data);
       })
@@ -20,13 +20,13 @@ export default function Home() {
   // handle delete review
   const deleteReview = async (id) => {
     try {
-      const res = await axios.get("/api/user");
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/user`,{withCredentials:true});
       if (res.data === "login") {
         toast.error("You must be logged in!");
         navigate("/login");
       }
       else{
-        await axios.delete(`/api/review/${id}`)
+        await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/review/${id}`,{withCredentials:true})
           .then((res)=>{
             if(res.data === 'owner'){
               toast.error('you must be the owner of the review to delete it');
@@ -44,7 +44,7 @@ export default function Home() {
   const navigate = useNavigate();
   const handleReviewForm = async()=>{
     try {
-      const res = await axios.get("/api/user");
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/user`,{withCredentials:true});
       if (res.data === "login") {
         toast.error("You must be logged in!");
         navigate("/login");

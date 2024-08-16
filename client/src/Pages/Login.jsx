@@ -45,7 +45,7 @@ export default function Login() {
   const handleSubmit = async(event)=>{
     event.preventDefault();
     try {
-      await axios.post('/api/login',formData)
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/login`,formData,{withCredentials:true})
         .then((res)=>{
           if(res.data === 'success'){
             dispatch(setUser(formData.username))

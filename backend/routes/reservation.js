@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express");
 const Reservation = require("../models/reservation.js");
 const User = require('../models/user.js');
@@ -20,7 +21,7 @@ router.post("/", wrapAsync(async (req, res) => {
   registeredUser.save();
 
   const id = newReservation._id;
-  res.redirect(`/reservation/confirmation/${id}`);
+  res.redirect(`${process.env.FRONTEND_URL}/reservation/confirmation/${id}`);
 }));
 
 router.delete("/cancel/:id", wrapAsync(async (req, res) => {
@@ -53,7 +54,7 @@ router.post("/Edited/:id", wrapAsync(async (req, res) => {
   }
   let { id } = req.params;
   await Reservation.findByIdAndUpdate(id, req.body);
-  res.redirect(`/reservation/confirmation/${id}`);
+  res.redirect(`${process.env.FRONTEND_URL}/reservation/confirmation/${id}`);
 }));
 
 module.exports = router;

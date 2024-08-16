@@ -47,7 +47,7 @@ export default function SignUp() {
   const handleFormSubmit = async(event)=>{
     event.preventDefault();
     try{
-      await axios.post('/api/signup',formData)
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/signup`,formData,{withCredentials:true})
         .then((res)=>{
           if(res.data === 'success'){
             dispatch(setUser(formData.username))
