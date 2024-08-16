@@ -29,7 +29,7 @@ router.post("/", isLoggedIn ,wrapAsync(async (req, res) => {
   registeredUser.reviews.push(newReview._id);
   registeredUser.save();
   
-  res.redirect(process.env.FRONTEND_URL);
+  res.redirect(`${process.env.FRONTEND_URL}`);
 }));
 
 router.delete("/:id", wrapAsync(async (req, res) => {
