@@ -13,30 +13,10 @@ const LocalStrategy = require('passport-local');
 const User = require('./models/user.js');
 const app = express();
 const cors = require('cors');
-
-// app.use(cors({
-//   origin: [process.env.FRONTEND_URL],
-//   credentials: true
-// }))
-
-app.use((req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "http://localhost:5173"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Content-Type, Authorization, X-Content-Type-Options, Accept, X-Requested-With, Origin, Access-Control-Request-Method, Access-Control-Request-Headers"
-  );
-  res.setHeader("Access-Control-Allow-Credentials", true);
-  res.setHeader("Access-Control-Allow-Private-Network", true);
-  //  Firefox caps this at 24 hours (86400 seconds). Chromium (starting in v76) caps at 2 hours (7200 seconds). The default value is 5 seconds.
-  res.setHeader("Access-Control-Max-Age", 7200);
-})
+app.use(cors({
+  origin: [process.env.FRONTEND_URL],
+  credentials: true
+}))
 
 const PORT = process.env.PORT
 const MONGO_URL = process.env.MONGO_URL
@@ -56,7 +36,8 @@ const sessionOptions = {
     maxAge : 7 * 24 * 60 * 60 * 1000,
     httpOnly : true,
   }
-}  
+}
+  
 // middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
