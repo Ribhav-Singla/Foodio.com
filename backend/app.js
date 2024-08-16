@@ -13,10 +13,19 @@ const LocalStrategy = require('passport-local');
 const User = require('./models/user.js');
 const app = express();
 const cors = require('cors');
-app.use(cors({
-  origin: [process.env.FRONTEND_URL],
-  credentials: true
-}))
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*'); // Specify your origin
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS'); // Allow specific HTTP methods
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Allow specific headers
+  res.header('Access-Control-Allow-Credentials', 'true'); // Allow credentials
+
+  if (req.method === 'OPTIONS') {
+      return res.status(200).end();
+  }
+
+  next();
+});
+
 
 const PORT = process.env.PORT
 const MONGO_URL = process.env.MONGO_URL
