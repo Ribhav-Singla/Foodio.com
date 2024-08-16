@@ -13,10 +13,30 @@ const LocalStrategy = require('passport-local');
 const User = require('./models/user.js');
 const app = express();
 const cors = require('cors');
-app.use(cors({
-  origin: [process.env.FRONTEND_URL],
-  credentials: true
-}))
+
+// app.use(cors({
+//   origin: [process.env.FRONTEND_URL],
+//   credentials: true
+// }))
+
+app.use((req, res, next) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "http://localhost:5173"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization, X-Content-Type-Options, Accept, X-Requested-With, Origin, Access-Control-Request-Method, Access-Control-Request-Headers"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader("Access-Control-Allow-Private-Network", true);
+  //  Firefox caps this at 24 hours (86400 seconds). Chromium (starting in v76) caps at 2 hours (7200 seconds). The default value is 5 seconds.
+  res.setHeader("Access-Control-Max-Age", 7200);
+})
 
 const PORT = process.env.PORT
 const MONGO_URL = process.env.MONGO_URL
@@ -36,21 +56,7 @@ const sessionOptions = {
     maxAge : 7 * 24 * 60 * 60 * 1000,
     httpOnly : true,
   }
-}
-
-app.use(function(req, res, next) {
-  // res.header("Access-Control-Allow-Origin", "*");
-  const allowedOrigins = ['http://localhost:5173', 'https://foodio-com-project.onrender.com', 'http://foodio-com-project.onrender.com'];
-  const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
-       res.setHeader('Access-Control-Allow-Origin', origin);
-  }
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-  res.header("Access-Control-Allow-credentials", true);
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, UPDATE");
-  next();
-});
-  
+}  
 // middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
